@@ -1,6 +1,6 @@
 {
-    "name": "gridly-lamda-sample-nodejs",
-    "description": "A Gridly lamda function package sample in NodeJS",
+    "name": "gridly-lambda-sample-nodejs",
+    "description": "A Gridly lambda function package sample in NodeJS",
     "dependencies": {
         "axios": "^0.19.2",
         "btoa": "^1.2.1",
