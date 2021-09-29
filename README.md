@@ -1,2 +1,2 @@
-# gridly-lamda-sample-nodejs
-A Gridly lamda function package sample in NodeJS
+# gridly-lambda-sample-nodejs
+A Gridly lambda function package sample in NodeJS
