@@ -4,21 +4,36 @@ const express = require("express");
 const app = express();
 const port = 8000;
 
-const { handler } = require("./index");
+const { fileHandler, speechHandler } = require("./index");
 
-app.get("/", async (req, res) => {
-  try {
-    handler({
-      viewId: "xnd0yxjdvwl949d",
-      inputColumnId: "id",
-      outputColumnId: "col_robot",
-    });
+app.get("/file", async (req, res) => {
+  const result = await fileHandler({
+    viewId: "ew14yy0oey2xzkl",
+    inputColumnId: "id",
+    outputColumnId: "col_robot",
+  });
 
-    res.send(JSON.stringify("SUCCESS"));
-  } catch (error) {
-    res.status(500);
-    res.send(error);
-  }
+  res.send(result);
+});
+
+app.get("/speech", async (req, res) => {
+  const result = await speechHandler({
+    viewId: "ew14yy0oey2xzkl",
+    inputColumnId: "col_text",
+    outputColumnId: "col_voice",
+    data: {
+      id: "robot-2-giant",
+      columnChanges: ["col_text"],
+      cells: [
+        {
+          columnId: "col_text",
+          value: "thanks you",
+        },
+      ],
+    },
+  });
+
+  res.send(result);
 });
 
 app.listen(port, () => {

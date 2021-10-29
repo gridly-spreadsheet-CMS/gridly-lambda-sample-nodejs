@@ -1,8 +1,8 @@
 const axios = require("axios");
 const FormData = require("form-data");
 const fs = require("fs");
+const config = require("../_config");
 
-const config = require("./_config");
 const MAX_RETRY = 3;
 const { API_URL, API_KEY } = config.GRIDLY;
 

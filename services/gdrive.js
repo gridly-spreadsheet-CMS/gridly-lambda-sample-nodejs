@@ -1,14 +1,14 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-
 const { google } = require("googleapis");
 const drive = google.drive("v3");
+const { G_KEY_PATH } = require("../_config");
 
 async function getFiles() {
   // Obtain user credentials to use for the request
   const auth = new google.auth.GoogleAuth({
-    keyFile: "./_gkey.json",
+    keyFile: G_KEY_PATH,
     scopes: ["https://www.googleapis.com/auth/drive.metadata.readonly"],
   });
   google.options({ auth });
@@ -22,7 +22,7 @@ async function getFiles() {
 
 async function downloadFile(fileName, fileId) {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "./_gkey.json",
+    keyFile: G_KEY_PATH,
     scopes: [
       "https://www.googleapis.com/auth/drive",
       "https://www.googleapis.com/auth/drive.appdata",
