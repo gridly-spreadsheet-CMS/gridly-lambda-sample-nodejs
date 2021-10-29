@@ -1,8 +1,15 @@
-const { getRecords, updateRecord, uploadFile } = require("./gridlyApi");
-const { getFiles, downloadFile } = require("./gdrive");
 const fs = require("fs");
 
-const handler = async (event) => {
+const {
+  getRecords,
+  updateRecord,
+  uploadFile,
+} = require("./services/gridlyApi");
+const { getFiles, downloadFile } = require("./services/gdrive");
+const { textToAudio } = require("./services/gcloud");
+
+// Load files from GDrive to Gridly
+const fileHandler = async (event) => {
   try {
     const { viewId, inputColumnId, outputColumnId } = event;
 
@@ -55,6 +62,54 @@ const handler = async (event) => {
   };
 };
 
+// Text to Speech
+const speechHandler = async (event) => {
+  try {
+    const { viewId, inputColumnId, outputColumnId, data } = event;
+    const { id, columnChanges, cells } = data;
+
+    if (columnChanges.includes(inputColumnId)) {
+      const updatedCell = cells.find((cell) => cell.columnId === inputColumnId);
+
+      if (updatedCell) {
+        const text = updatedCell.value;
+        const emptyCellData = [
+          {
+            id,
+            cells: [{ columnId: outputColumnId, value: [] }],
+          },
+        ];
+
+        await updateRecord(viewId, emptyCellData);
+
+        if (text) {
+          const filePath = await textToAudio(text);
+
+          await uploadFile({
+            viewId,
+            recordId: id,
+            columnId: outputColumnId,
+            filePath: filePath,
+          });
+
+          await fs.unlinkSync(filePath);
+        }
+      }
+    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify(error),
+    };
+  }
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify("Hello from Lambda!"),
+  };
+};
+
 module.exports = {
-  handler,
+  fileHandler,
+  speechHandler,
 };
