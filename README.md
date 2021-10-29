@@ -1,2 +1,3 @@
 # gridly-lambda-sample-nodejs
-A Gridly lambda function package sample in NodeJS
+
+Lambda in NodeJS samples for Trigger with Lambda in Gridly.
