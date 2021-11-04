@@ -20,7 +20,7 @@ In the project directory, do:
 1. `npm install` to install library packages
 2. Edit `.env` file to replace your Gridly API key and your Google service account key file path.
 3. Select all files and compress into zip file
-    * Show hidden files `.env` by `Command + Shift + .`
+    * Make sure the hidden file `.env` is shown by `Command + Shift + .`
     * Select all files by `Cammand + A`
     * Right click + `Compress...`
 
