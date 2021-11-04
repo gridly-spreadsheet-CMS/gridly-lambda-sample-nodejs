@@ -6,7 +6,7 @@ Manage your game’s data as a single source of truth and roll out continuous up
 
 See more details about [Gridly](https://www.gridly.com/).
 
-This is a sample project that shows how to implement a Lambda package in NodeJS to use with Trigger functionality in Gridly.
+This is a sample project in NodeJS, showing how to implement a Lambda function used for Trigger functionality in Gridly.
 
 ## Prerequisities
 
@@ -15,6 +15,8 @@ This is a sample project that shows how to implement a Lambda package in NodeJS 
 
 ## How to build project into Zip package
 
+In the project directory, do:
+
 1. `npm install` to install library packages
 2. Edit `.env` file to replace your Gridly API key and your Google service account key file path.
 3. Select all files and compress into zip file
@@ -22,7 +24,9 @@ This is a sample project that shows how to implement a Lambda package in NodeJS 
     * Select all files by `Cammand + A`
     * Right click + `Compress...`
 
-## How to upload built Zip package in Gridly Trigger
+## How to upload built Zip package to Gridly Trigger
+
+Below illustration shows how to use this sample in Gridly Trigger to traslate a text into sound file:
 
 <img src="https://www.gridly.com/upload-data/how_to_add_trigger.png" width="300" />
 
